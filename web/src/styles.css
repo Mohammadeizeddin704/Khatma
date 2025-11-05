@@ -350,6 +350,43 @@ body {
   opacity: 0.88;
 }
 
+@media (max-width: 768px) {
+  .kh-header .inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .kh-brand {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .kh-userwrap {
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .kh-userpill {
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 6px 12px;
+  }
+
+  .kh-reset,
+  .kh-logout {
+    flex: 1 1 calc(50% - 6px);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 420px) {
   .khatma-card {
     padding: 18px;
@@ -388,18 +425,20 @@ body {
 
   .kh-header .inner {
     padding: 8px 10px;
-    flex-wrap: wrap;
   }
 
   .kh-userwrap {
-    width: 100%;
-    justify-content: flex-end;
     gap: 8px;
   }
 
   .kh-userpill {
-    max-width: 210px;
-    padding: 6px 10px;
+    max-width: 100%;
+  }
+
+  .kh-reset,
+  .kh-logout {
+    flex: 1 1 100%;
+    font-size: 12px;
   }
 }
 
