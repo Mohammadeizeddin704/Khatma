@@ -21,6 +21,7 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
   const [weekId, setWeekId] = React.useState<string>("");
   const [parts, setParts] = React.useState<Part[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [pendingPart, setPendingPart] = React.useState<number | null>(null);
   const socketRef = React.useRef<Socket | null>(null);
 
   React.useEffect(() => {
@@ -115,6 +116,8 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
       alert("يرجى تسجيل الدخول أولاً.");
       return;
     }
+    if (pendingPart !== null) return;
+    setPendingPart(number);
 
     const payload = profile ? { profile } : {};
     if (!part.claimed_by) {
@@ -127,6 +130,8 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
       } catch (error) {
         console.error(error);
         alert("تعذر حجز الجزء. حاول مرة أخرى.");
+      } finally {
+        setPendingPart(null);
       }
       return;
     }
@@ -139,6 +144,8 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
     } catch (error) {
       console.error(error);
       alert("تعذر إلغاء الحجز الآن.");
+    } finally {
+      setPendingPart(null);
     }
   }
 
@@ -158,10 +165,12 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
               {parts.map((part) => {
                 const isMine = Boolean(part.claimed_by) && part.claimed_by === userId;
                 const isTaken = Boolean(part.claimed_by);
+                const isPending = pendingPart === part.number;
                 const className = [
                   "khatma-btn",
                   isMine ? "mine" : "",
                   !isMine && isTaken ? "claimed" : "",
+                  isPending ? "loading" : "",
                 ]
                   .filter(Boolean)
                   .join(" ");
@@ -175,6 +184,7 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
                 ]
                   .filter(Boolean)
                   .join(" ");
+                const disabled = isPending || (!isMine && isTaken);
                 return (
                   <div key={part.number} className="khatma-cell">
                     <button
@@ -190,9 +200,13 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
                               ? `محجوز بواسطة ${part.claimed_name}`
                               : "محجوز"
                       }
-                      disabled={!isMine && isTaken}
+                      disabled={disabled}
                     >
-                      {part.number}
+                      {isPending ? (
+                        <span className="khatma-spinner" aria-hidden="true" />
+                      ) : (
+                        part.number
+                      )}
                     </button>
                     {isTaken ? (
                       <span className={nameClass} title={displayName}>

@@ -114,6 +114,29 @@ body {
   color: #e2e8f0;
 }
 
+.khatma-btn.loading {
+  cursor: wait;
+}
+
+.khatma-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 9999px;
+  animation: khSpin 0.8s linear infinite;
+}
+
+.khatma-btn.claimed .khatma-spinner {
+  border-color: rgba(226, 232, 240, 0.4);
+  border-top-color: #e2e8f0;
+}
+
+.khatma-btn.mine .khatma-spinner {
+  border-color: rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+}
+
 .khatma-btn:disabled {
   cursor: not-allowed;
   opacity: 0.95;
@@ -477,6 +500,15 @@ body {
   50% {
     transform: scale(1.2);
     opacity: 0.6;
+  }
+}
+
+@keyframes khSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
