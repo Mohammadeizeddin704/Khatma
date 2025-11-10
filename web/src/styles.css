@@ -36,9 +36,10 @@ body {
 
 .khatma-card__top {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 18px;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
 }
 
 .khatma-card__subtitle {
@@ -74,11 +75,12 @@ body {
   height: 68px;
   border: 0;
   border-radius: 9999px;
-  color: #fff;
+  color: var(--khatma-navy);
   font-weight: 700;
-  background: var(--khatma-red);
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.25);
   box-shadow:
-    0 12px 24px -18px rgba(239, 68, 68, 0.75),
+    0 12px 24px -18px rgba(15, 23, 42, 0.3),
     0 4px 12px rgba(15, 23, 42, 0.08);
   cursor: pointer;
   display: grid;
@@ -104,6 +106,7 @@ body {
 
 .khatma-btn.mine {
   background: var(--khatma-green);
+  color: #fff;
   box-shadow:
     0 14px 30px -18px rgba(16, 185, 129, 0.75),
     0 4px 12px rgba(15, 23, 42, 0.08);
@@ -112,6 +115,7 @@ body {
 .khatma-btn.claimed {
   background: #94a3b8;
   color: #e2e8f0;
+  border-color: transparent;
 }
 
 .khatma-btn.loading {
@@ -239,6 +243,13 @@ body {
   margin-top: 20px;
 }
 
+.khatma-legend.legend-top {
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
 .khatma-dot {
   display: inline-block;
   width: 12px;
@@ -249,7 +260,9 @@ body {
 }
 
 .khatma-dot.red {
-  background: var(--khatma-red);
+  background: #fff;
+  border: 2px solid #94a3b8;
+  box-shadow: 0 0 6px rgba(148, 163, 184, 0.35);
 }
 
 .khatma-dot.green {

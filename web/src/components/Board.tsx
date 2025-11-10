@@ -157,6 +157,18 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
           <h2 className="khatma-card__title">أسبوع: {weekKey}</h2>
         </div>
 
+        <div className="khatma-legend legend-top">
+          <span>
+            <span className="khatma-dot red"></span>متاح
+          </span>
+          <span>
+            <span className="khatma-dot green"></span>محجوز لك
+          </span>
+          <span>
+            <span className="khatma-dot gray"></span>محجوز للآخرين
+          </span>
+        </div>
+
         {loading ? (
           <div className="khatma-loading">جارٍ التحميل...</div>
         ) : (
@@ -253,18 +265,6 @@ export default function Board({ weekKey, userId, profile, isAdmin }: BoardProps)
             </div>
           </>
         )}
-
-        <div className="khatma-legend">
-          <span>
-            <span className="khatma-dot red"></span>متاح
-          </span>
-          <span>
-            <span className="khatma-dot green"></span>محجوز لك
-          </span>
-          <span>
-            <span className="khatma-dot gray"></span>محجوز للآخرين
-          </span>
-        </div>
       </section>
     </main>
   );
